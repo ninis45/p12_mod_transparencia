@@ -99,7 +99,7 @@ class Admin_obligaciones extends Admin_Controller {
             $obligacion = (Object)$_POST;
         }
         $this->template->set('obligacion',$obligacion)
-                    ->append_metadata('<script type="text/javascript">var campos ='.$obligacion->campos.' ; </script>')
+                    ->append_metadata('<script type="text/javascript">var campos ='.($obligacion->campos?$obligacion->campos:'[]').' ; </script>')
                     ->append_js('module::transparencia.controller.js')
                     ->build('admin/obligaciones/form'); 
     }

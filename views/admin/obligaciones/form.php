@@ -44,7 +44,7 @@
                             <a href="#" ng-click="reordering=true" class="btn" ng-class="{'btn-default':!reordering}">Ordenar elementos</a>
                             
                          </div>
-                          <table class="table" ng-if="!reordering">
+                          <table class="table" ng-hide="reordering">
                             <thead>
                                 <tr>
                                     <th>Campo</th>
@@ -81,7 +81,7 @@
           
           
           
-          <div class="divider clearfix">
+          <div class="divider clearfix" ng-if="!reordering">
         	   <?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'cancel'))) ?>
           </div>
     <?php echo form_close();?>
