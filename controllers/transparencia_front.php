@@ -21,8 +21,18 @@ class Transparencia_front extends Public_Controller
         $this->load->library('files/files');
         $this->load->library(array(
             'transparencia',
-            'centros/centro'
+            //'centros/centro'
         ));
+        
+        $this->template->periodos = array(
+        
+            '1'=>'Mensual',
+            '2'=>'Bimestral',
+            '3'=>'Trimestral',
+            '6'=>'Semestral',
+            '12'=>'Anual',
+        );
+        
         $this->template->set_breadcrumb('Transparencia','transparencia');
     }
     function cron()
@@ -105,6 +115,7 @@ class Transparencia_front extends Public_Controller
          }
          $this->template->title($this->module_details['name'])
                 ->set('fracciones',$fracciones)
+                ->set('tipo',$tipo)
                 ->build('index');
     }
     function download($id_fraccion,$id_obligacion)
@@ -152,6 +163,7 @@ class Transparencia_front extends Public_Controller
         
        
         $this->template->title($this->module_details['name'])
+                ->set_layout('modal.html')
                 ->set_breadcrumb($fraccion->nombre)
                 ->set('fraccion',$fraccion)
                 ->build('details');

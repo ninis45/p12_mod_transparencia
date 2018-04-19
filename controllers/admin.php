@@ -15,12 +15,12 @@ class Admin extends Admin_Controller
         $this->load->library(array(
                 'files/files',
                 'transparencia',
-                'centros/centro'
+                //'centros/centro'
         
                 
         ));
         
-        $this->load->helper('descargas/descargas');
+        //$this->load->helper('descargas/descargas');
         $this->lang->load('transparencia');
         
         $this->template
@@ -286,12 +286,12 @@ class Admin extends Admin_Controller
              $folder = $this->file_folders_m->get_by_path('juridico/transparencia') OR show_error('La carpeta juridico/transparencia no existe');
             
              $pdf   = Files::upload($folder->id,false,'anexo_pdf',false,false,false,'pdf');
-             $excel = Files::upload($folder->id,false,'anexo_excel',false,false,false,'xls|xlsx');
+             $excel = Files::upload($folder->id,false,'anexo_xls',false,false,false,'xls|xlsx');
              
-             
+            
              $data = array(
                 'anexo_pdf'   => $this->input->post('anexo_pdf'),
-                'anexo_excel' => $this->input->post('anexo_excel'),
+                'anexo_xls'   => $this->input->post('anexo_xls'),
              );   
              if($pdf['status'])
              {
@@ -300,7 +300,7 @@ class Admin extends Admin_Controller
             
              if($excel['status'])
              {
-                        $data['anexo_excel'] = $excel['data']['id'];
+                        $data['anexo_xls'] = $excel['data']['id'];
              }
              
             if(!empty($data)&&$this->obligacion_m->update($obligacion->id,$data))

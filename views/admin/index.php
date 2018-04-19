@@ -47,16 +47,21 @@
                                              $html = '';
                                              
                                              switch($campo->tipo){
+                                                case 'anchor':
+                                                    $html   = '<a  href="http://'.$campos->{$campo->slug}.'" target="_blank">'.$campos->{$campo->slug}.'</a>'; 
+                                                break;
                                                 case 'upload':
                                                     
                                                     $file   = Files::get_file($campos->{$campo->slug});
-                                                    //print_r($file);
-                                                    $html   = '<a  href="'.$file['data']->path.'" target="_blank">'.$file['data']->path.'</a>'; 
+                                                    
+                                                    $html   = $file['status']?'<a  href="'.$file['data']->path.'" target="_blank">'.$file['data']->path.'</a>':''; 
                                                 break; 
+                                                case 'calendar':
                                                 case 'input':
                                                     $html = $campos->{$campo->slug};
                                                 break;
                                                 default:
+                                                    $html = 'Formato incorrecto';
                                                 break;
                                              }
                                          ?>

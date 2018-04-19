@@ -26,17 +26,17 @@
         <label>Documento Excel</label>
         <div class="row">
             
-            <?php $file_xls = Files::get_file($obligacion->anexo_excel);?>
+            <?php $file_xls = Files::get_file($obligacion->anexo_xls);?>
             <?php if($file_xls['status']):?>
             <div class="col-md-3 block-file">
                 
                 <?=$file_xls['data']->name?> | <a target="_blank" href="<?=$file_xls['data']->path?>">Descargar </a> 
-                <input type="hidden" name="anexo_excel" value="<?=$obligacion->anexo_excel?>" />
+                <input type="hidden" name="anexo_xls" value="<?=$obligacion->anexo_xls?>" />
             </div>
             <?php endif;?>
             
             <div class="col-md-9">
-                <?=form_upload('anexo_excel',false,'accept="application/vnd.ms-excel"')?>
+                <?=form_upload('anexo_xls',false,'accept="application/vnd.ms-excel"')?>
             </div>
             
         </div>

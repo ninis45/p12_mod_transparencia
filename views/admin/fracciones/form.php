@@ -1,8 +1,9 @@
 <section>
     <div class="lead text-success"><?=lang('fracciones:'.$this->method)?></div>
+     <?php echo form_open_multipart(uri_string(), 'name="frm_fondo"  data-mode="'.$this->method.'"'); ?>
         <div class="ui-tab-container ui-tab-horizontal">
         
-             <?php echo form_open_multipart(uri_string(), 'name="frm_fondo"  data-mode="'.$this->method.'"'); ?>
+            
         	<uib-tabset justified="false" class="ui-tab">
 	             <uib-tab heading="Información General">
             
@@ -25,6 +26,10 @@
                                 <?=form_textarea('descripcion',$fraccion->descripcion,'class="form-control"');?>
                             </div>
                             <div class="form-group">
+                                <label>Unidades administrativas</label>
+                                <?=form_textarea('unidades',$fraccion->unidades,'class="form-control"');?>
+                            </div>
+                            <div class="form-group">
                                 <label>Periodicidad</label>
                                 <?=form_dropdown('periodicidad',$periodos,$fraccion->periodicidad,'class="form-control"');?>
                             </div>
@@ -39,26 +44,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                             <div class="form-group">
-                                <label>Archivo anexo</label>
-                                <div class="row">
-                                    <?php if($fraccion->anexo):?>
-                                    <div class="col-md-4">
-                                        <?php $file = Files::get_file($fraccion->anexo);?>
-                                   
-                                        <a class="" href="<?=base_url('files/download/'.$file['data']->id)?>"><i class="fa fa-download"></i> Descargar archivo</a>
-                                        <input type="hidden" name="anexo" value="<?=$file['data']->id?>" />
-                                    </div>
-                                    <?php endif;?>
-                                    <div class="col-md-8">
-                                         <?=form_upload('anexo')?>
-                                    </div>
-                                </div>
-                                
-                                    
-                                
-                               
-                             </div>
+                             
                         </div>
                     </div>
                        
@@ -77,13 +63,13 @@
                             <?php endforeach;?>
                </uib-tab>
          </uib-tabset>
-         <div class="divider"></div>
+         
+         
+     </div>
+     <div class="divider clearfix"></div>
                         <p><strong>Nota:</strong> Los campos marcados con (*) son obligatorios.</p>
                        <div class="buttons">
                     	<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'cancel'))) ?>
-                       </div>
-         <?php echo form_close();?>
-     </div>
-         
-    
+      </div>    
+    <?php echo form_close();?>
 </section>

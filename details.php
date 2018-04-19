@@ -108,13 +108,13 @@
         				array(
         					'name' => 'fracciones:create',
         					'uri' => 'admin/transparencia/fracciones/create',
-        					'class' => 'btn btn-success',
+        					'class' => 'btn btn-primary',
                            
         				),
                         array(
         					'name' => 'fracciones:ordering',
         					'uri' => 'admin/transparencia/fracciones?order=1',
-        					'class' => 'btn btn-primary',
+        					'class' => 'btn btn-default',
                            
         				),
                        
@@ -136,7 +136,7 @@
 				'id' => array('type' => 'INT', 'constraint' => 11, 'auto_increment' => true, 'primary' => true,),
 				'nombre' => array('type' => 'VARCHAR', 'constraint' => 254,),
                 'numeral' => array('type' => 'VARCHAR', 'constraint' => 254,),
-                'periodicidad' => array('type' => 'VARCHAR', 'constraint' => 254,),
+                'periodicidad' => array('type' => 'INT', 'constraint' => 11,),
 				'descripcion' => array('type' => 'TEXT', 'null' => true,),
 				'motivo' => array('type' => 'TEXT', 'null' => true,),
 				'aplicable' => array('type' => 'INT', 'constraint' => 11, 'null' => true,'default'=>'0'),
@@ -146,8 +146,7 @@
 				'id'          => array('type' => 'INT', 'constraint' => 11, 'auto_increment' => true, 'primary' => true,),
    	            'id_fraccion' => array('type' => 'INT', 'constraint' => 11, 'null' => true),
                 'nombre'      => array('type' => 'VARCHAR', 'constraint' => 254,),
-                //'id_fraccion_campo' => array('type' => 'INT', 'constraint' => 11, 'null' => true),
-				//'valor'             => array('type' => 'VARCHAR', 'constraint' => 254,),
+                
                 'campos'      => array('type' => 'TEXT', 'null' => true),
                 'helper'      => array('type' => 'TEXT', 'null' => true),
                 'created_on'  => array('type' => 'INT', 'constraint' => 11, 'null' => true),
@@ -160,11 +159,11 @@
 				'id'          => array('type' => 'INT', 'constraint' => 11, 'auto_increment' => true, 'primary' => true,),
    	            'id_fraccion' => array('type' => 'INT', 'constraint' => 11, 'null' => true),
                 'id_fraccion_obligacion' => array('type' => 'INT', 'constraint' => 11, 'null' => true),
-                'campos'             => array('type' => 'TEXT', 'null' => true),
-				
+                'campos'            => array('type' => 'TEXT', 'null' => true),
+				'user_id'           => array('type' => 'INT', 'constraint' => 11, 'null' => true),
                 'created_on'        => array('type' => 'INT', 'constraint' => 11, 'null' => true),
                 
-               
+                'updated_on'        => array('type' => 'INT', 'constraint' => 11, 'null' => true),
 				
 				
 			),

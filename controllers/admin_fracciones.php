@@ -25,7 +25,7 @@ class Admin_fracciones extends Admin_Controller {
             'users/user_m'
         ));
         $this->load->library(array(
-            'centros/centro',
+            'asignaciones',
             'files/files'    
         ));
         $this->lang->load('transparencia');
@@ -65,6 +65,11 @@ class Admin_fracciones extends Admin_Controller {
 				'label' => 'Usuarios',
 				'rules' => ''
 				),
+            array(
+				'field' => 'unidad',
+				'label' => 'Unidad administrativa',
+				'rules' => ''
+				),
             'motivo'=> array(
 				'field' => 'motivo',
 				'label' => 'Motivo',
@@ -101,9 +106,9 @@ class Admin_fracciones extends Admin_Controller {
     {
         $fraccion = $this->fraccion_m->get($id) OR show_404();
         
-        $fraccion->users = Centro::GetList($id,'transparencia');
+        $fraccion->users =  Asignaciones::GetList($id,'transparencia');
         
-        
+       
         if($this->input->post('aplicable') == 0 )
         {
             $this->validation_rules['motivo']['rules'].='|required';
@@ -121,7 +126,7 @@ class Admin_fracciones extends Admin_Controller {
                 'descripcion'  => $this->input->post('descripcion'),
                 'aplicable'    => $this->input->post('aplicable'),
                 'motivo'       => $this->input->post('motivo'),
-                'anexo'        => $this->input->post('anexo'),
+                'unidades'     => $this->input->post('unidades'),
                 'tipo'        => $this->input->post('tipo'),
             );
             $folder = $this->file_folders_m->get_by_path('juridico/transparencia') OR show_error('La carpeta juridico/transparencia no existe');
@@ -134,7 +139,7 @@ class Admin_fracciones extends Admin_Controller {
              }
             if($this->fraccion_m->update($id,$data))
             {
-			     Centro::AddUsers($id,'transparencia',$this->input->post('users'));
+			     //Centro::AddUsers($id,'transparencia',$this->input->post('users'));
 				$this->session->set_flashdata('success',lang('global:save_success'));
 				
 			}
@@ -152,7 +157,7 @@ class Admin_fracciones extends Admin_Controller {
         }
         
         $users = $this->db->select('*,users.id AS id')
-                            ->where_in('groups.name',array('transparencia'))
+                            ->where_in('groups.name',array('unidad'))
                             ->join('groups','groups.id=users.group_id')
                             ->join('profiles','profiles.user_id=users.id')
                             ->get('users')
@@ -182,21 +187,21 @@ class Admin_fracciones extends Admin_Controller {
                 'descripcion'  => $this->input->post('descripcion'),
                 'aplicable'    => $this->input->post('aplicable'),
                 'motivo'       => $this->input->post('motivo'),
-                'anexo'        => '',
+                 'unidades'     => $this->input->post('unidades'),
                 'tipo'        => $this->input->post('tipo'),
             );
             
-             $folder = $this->file_folders_m->get_by_path('juridico/transparencia') OR show_error('La carpeta juridico/transparencia no existe');
+             /*$folder = $this->file_folders_m->get_by_path('juridico/transparencia') OR show_error('La carpeta juridico/transparencia no existe');
             
              $file = Files::upload($folder->id,false,'anexo');
                     
              if($file['status'])
              {
                         $data['anexo'] = $file['data']['id'];
-             }
+             }*/
             if($id = $this->fraccion_m->insert($data))
             {
-				Centro::AddUsers($id,'transparencia',$this->input->post('users'));
+				Asignaciones::AddUsers($id,'transparencia',$this->input->post('users'));
 				$this->session->set_flashdata('success',lang('global:save_success'));
 				
 			}
@@ -214,7 +219,7 @@ class Admin_fracciones extends Admin_Controller {
 		}
         
         $users = $this->db->select('*,users.id AS id')
-                            ->where_in('groups.name',array('transparencia'))
+                            ->where_in('groups.name',array('unidad'))
                             ->join('groups','groups.id=users.group_id')
                             ->join('profiles','profiles.user_id=users.id')
                             ->get('users')
