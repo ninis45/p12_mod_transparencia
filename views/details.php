@@ -43,12 +43,17 @@
         
        
          <?php foreach($fraccion->obligaciones as $obligacion):?>
+        
            <h2><?=$obligacion->nombre?></h2>
-           <p>
-           <?php if($obligacion->anexo_excel): ?>
-                <a target="_blank" href="<?=base_url('files/download/'.$obligacion->anexo_excel)?>"><button type="button" class="btn btn-large btn-success"><em class="fa fa-file-excel-o"> Descargar Excel</em></button> </a> 
+           <p class="text-right">
+           <?php if($obligacion->anexo_xls): ?>
+                <a target="_blank" href="<?=base_url('files/download/'.$obligacion->anexo_xls)?>"><button type="button" class="btn btn-large btn-success"><i class="fa fa-file-excel-o"> </i> Descargar Excel</button> </a> 
            <?php endif;?>
-                <a target="_blank"> <button type="button" class="btn btn-large btn-danger"><em class="fa fa-eye"> Ver Online</em></button> </a> <span style="padding-left: 20px;"> <span class="fa fa-hand-o-left"></span> Descargue y/o visualice aquí</span></p>
+            <?php if($obligacion->anexo_pdf): ?>
+                <a target="_blank" href="<?=base_url('files/download/'.$obligacion->anexo_pdf)?>"> <button type="button" class="btn btn-large btn-danger"><i class="fa fa-file-pdf-o"> </i> Descargar Pdf</button> </a> 
+                </p>
+           <?php endif;?>
+           
            <hr/>
            <div class="table-responsive">
            <table class="table table-hover course-list-table tablesorter">
