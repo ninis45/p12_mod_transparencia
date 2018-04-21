@@ -25,8 +25,8 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <?=form_input('campo','','class="form-control" placeholder="Nombre del campo" ng-model="form.nombre" ')?>
-                                <slug from="form.nombre" to="form.slug" >
-                                <? //=form_input('slug','','class="form-control" placeholder="Slug" ng-model="form.slug" ')?>
+                                <slug from="form.nombre" to="form.slug" space="_" >
+                               
                                 <input type="hidden" name="slug" ng-model="form.slug" />
                                 </slug>
                             </div>
