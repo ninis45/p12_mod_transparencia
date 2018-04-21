@@ -76,7 +76,7 @@ class Admin_obligaciones extends Admin_Controller {
             $data = array(
             
                 
-                'campos'      => json_encode($this->input->post('campos')),
+                'campos'      => $this->input->post('campos')?json_encode($this->input->post('campos')):null,
                 'nombre'      => $this->input->post('nombre'),
                 'helper'      => $this->input->post('helper'),
                 
@@ -113,7 +113,7 @@ class Admin_obligaciones extends Admin_Controller {
             $data = array(
             
                 'id_fraccion' => $id_fraccion,
-                'campos'      => json_encode($this->input->post('campos')),
+                'campos'      => $this->input->post('campos')?json_encode($this->input->post('campos')):null,
                 'nombre'      => $this->input->post('nombre'),
                 'helper'      => $this->input->post('helper'),
                 'created_on'  => now()

@@ -105,6 +105,7 @@ class Transparencia_front extends Public_Controller
          
          if($tipo){
              $fracciones = $this->fraccion_m->where('tipo',$tipo)
+                            ->order_by('ordering')
                             ->get_all();
              
              
